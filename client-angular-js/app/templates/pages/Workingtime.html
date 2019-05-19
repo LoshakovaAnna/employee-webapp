@@ -1,0 +1,22 @@
+<div class="container py-5"> 
+    <h2 class = "text-center  text-primary  pb-2">Отчет о рабочем времени</h2> 
+    
+    <h3 class = "text-muted pb-3">{{emplInfo.EmployeeID}}. {{ emplInfo.FIO}} </h3>
+    
+    <div class = "d-flex flex-column  flex-sm-row justify-content-between p-2"> 
+        <input  type = "date"   class="form-control col-md-8" ng-model="date" ng-change="clearWorkingData()"/>                
+        <button class="btn btn-success col-md-3"  ng-click="getTimeWork()"  >
+                Вывести данные
+        </button>
+    </div>
+    <div ng-if= " workingTime !== null ">
+    <h4 class="mt-4 mb-4" >Общее рабочее время: 
+        <span class="text-danger"> {{workingTime}}</span>
+    </h4>
+
+    <p ng-if=" !currentDayListTime"> Записей нет </p>   
+    <p ng-if="( currentDayListTime ) && (currentDayListTime.length === 0) "> Записей нет </p>   
+    <table-working-time ng-if="( currentDayListTime ) &&( currentDayListTime.length > 0 )">    
+    </table-working-time>
+</div>
+</div>
