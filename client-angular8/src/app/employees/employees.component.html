@@ -1,0 +1,31 @@
+<div class="container py-3">
+  <h1 class ="text-center  text-primary  pb-3"> Сотрудники </h1>
+
+  <table *ngIf="employeesService.ListEmployees.length !== 0" class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Сотрудник</th>
+      <th scope="col">Состояние</th>
+      <th scope="col">Время	изменения	состояния</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let emp of employeesService.ListEmployees">
+      <th scope="row"> {{emp.EmployeeID}} </th>
+      <td>
+        <a class = "link-employee" title = "Отчет	о	рабочем	времени"
+          [routerLink]="['/employee/', emp.EmployeeID]">
+          {{emp.FIO}}
+        </a>
+      </td>
+      <td>
+        <p *ngIf="emp.EventDescriptionID === 45" class="text-success">Присутствует</p>
+        <p *ngIf="emp.EventDescriptionID === 46" class="text-danger">Отсутствует</p>
+      </td>
+      <td>{{ emp.EventDate }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

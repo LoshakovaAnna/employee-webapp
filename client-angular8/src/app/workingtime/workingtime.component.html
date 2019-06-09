@@ -1,0 +1,47 @@
+<div class="container py-3">
+  <h2 class = "text-center  text-primary  pb-2">Отчет о рабочем времени</h2>
+
+  <h3 class = "text-muted pb-3"
+    *ngIf="workingtimeService.emplInfo"
+  >{{workingtimeService.emplInfo.EmployeeID}}. {{workingtimeService.emplInfo.FIO}} </h3>
+
+  <div class = "d-flex flex-column  flex-sm-row justify-content-between p-2">
+    <input  type = "date"   class="form-control col-md-8"
+            [placeholder]="workingtimeService.date"
+            [(ngModel)]="workingtimeService.date"
+            (change)="workingtimeService.clearWorkingData()"
+          />
+    <button class="btn btn-success col-md-3"  (click)="workingtimeService.getTimeWork()"  >
+      Вывести данные
+    </button>
+  </div>
+  <div *ngIf="workingtimeService.workingTime !== null ">
+    <h4 class="mt-4 mb-4" >Общее рабочее время:
+      <span class="text-danger"> {{workingtimeService.workingTime}}</span>
+    </h4>
+
+    <p *ngIf="!workingtimeService.currentDayListTime"> Записей нет </p>
+    <p *ngIf="workingtimeService.currentDayListTime.length === 0 "> Записей нет </p>
+    <div *ngIf="( workingtimeService.currentDayListTime ) &&( workingtimeService.currentDayListTime.length > 0 )">
+      <table class="table table-hover table-sm">
+        <thead>
+        <tr>
+          <th scope="col">Время</th>
+          <th scope="col">Статус</th>
+          <th scope="col">Описание</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let record of workingtimeService.currentDayListTime">
+          <td>{{record.dateTimeEvent}}</td>
+          <td>{{record.status}}</td>
+          <td>{{record.EventDescription}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+
+  </div>
+</div>
